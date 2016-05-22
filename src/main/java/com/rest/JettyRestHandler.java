@@ -1,8 +1,10 @@
 package com.rest;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.webapp.WebAppContext;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 public class JettyRestHandler {
@@ -14,11 +16,22 @@ public class JettyRestHandler {
 		contextHandler.setContextPath("/rest");
 
 		ServletHolder servletHolder = contextHandler.addServlet(ServletContainer.class, "/*");
-		servletHolder.setInitParameter("javax.ws.rs.Application", RestAppConfig.class.getCanonicalName());
+		
+		servletHolder.setInitParameter("javax.ws.rs.Application", DepartmentConfig.class.getCanonicalName());
 
 	//	servletHolder.setInitParameter(		"jersey.config.server.provider.classnames",	DepartmentService.class.getCanonicalName());
 
-		server.setHandler(contextHandler);
+		
+		WebAppContext appContext = new WebAppContext();
+		appContext.setContextPath("/angular");
+		appContext.setResourceBase("../simplerest/src/main/webapp");
+		
+		
+		ContextHandlerCollection collection =new ContextHandlerCollection();
+		collection.addHandler(contextHandler);
+		collection.addHandler(appContext);
+		
+		server.setHandler(collection);
 		server.start();
 		server.join();
 	}
