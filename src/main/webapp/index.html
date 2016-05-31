@@ -2,38 +2,52 @@
 
 <head>
 <title>My Angular</title>
-<script type="text/javascript" src="js/angular.min.js" ></script>
-<script type="text/javascript" src="js/app.js" ></script>
-<link rel="stylesheet" href="css/bootsrap.css"></link>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script type="text/javascript">
+function firstAjax(){
+	var xmlHttpRequest = new XMLHttpRequest();
+	
+	xmlHttpRequest.onreadystatechange =function(){
+		if(xmlHttpRequest.readyState==4 && xmlHttpRequest.status== 200){
+			document.getElementById("idtest").innerHTML = "Text Changed";	
+			
+		}
+	};
+	xmlHttpRequest.open("GET", "/rest/departments/10", true);
+	xmlHttpRequest.send();	
+}
+
+</script>
+
 </head>
 
 
 
 <body ng-controller="DepartmentControl">
-<p>Hello 1+2 = {{1+2}}</p>
- <p>Nothing here {{'yet' + '!'}}</p>
- <p> Total : {{total}} </p>
- <ul>
- 	<li ng-repeat="department in find">
- 	<span>
- 	{{department.departmentId}}
- 	</span>
- 	<p>{{department.departmentName}}</p>
- 	</li>
- </ul>
- 
- <ul>
- 	<li ng-repeat="department in departments">
- 	<span>
- 	{{department.departmentId}}
- 	</span>
- 	<p>{{department.departmentName}}</p>
- 	</li>
- </ul>
- 
- 
- 
- 
- 
+	<p>Hello 1+2 = {{1+2}}</p>
+	<p>Nothing here {{'yet' + '!'}}</p>
+	<p>Total : {{total}}</p>
+
+	<div id="idtest">Text to be changes</div>
+
+	<ul>
+		<li ng-repeat="department in find"><span>
+				{{department.departmentId}} </span>
+			<p>{{department.departmentName}}</p></li>
+	</ul>
+	<button type="button" onclick="firstAjax()">CHange content</button>
+
+	<ul>
+		<li ng-repeat="department in departments"><span>
+				{{department.departmentId}} </span>
+			<p>{{department.departmentName}}</p></li>
+	</ul>
+
+
+
+
+
 </body>
 </html>

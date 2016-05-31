@@ -44,6 +44,13 @@ public class Department implements Serializable {
 	public void setLocationId(Short locationId) {
 		this.locationId = locationId;
 	}
+	
+	@Override
+	public String toString(){
+		return this.departmentId + this.managerId+this.departmentName+this.locationId;
+	}
+	
+	
 	@Id
 	@Basic(optional = false)
 	@NotNull

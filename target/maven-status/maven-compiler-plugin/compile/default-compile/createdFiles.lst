@@ -1,10 +1,6 @@
-com/rest/Department.class
 com/rest/HelloServlet.class
 com/rest/JettyHelloWorldWebContext.class
-com/rest/DepartmentRest.class
 com/rest/DepartmentService.class
 com/rest/RestAppConfig.class
-com/rest/DepartmentConfig.class
-com/rest/JettyRestHandler.class
 com/rest/JettyServletHandler.class
 com/rest/JettyDefaultHandler.class
